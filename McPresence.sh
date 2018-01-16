@@ -47,11 +47,11 @@ do
 	if [[ " ${leases[@]} " =~ " ${MAC} " ]]; then
 		# Present
 		curl -X POST -d "ON" -H "Content-Type: text/plain" \
-		-i http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
+		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
 	else
 		# Absent
 		curl -X POST -d "OFF" -H "Content-Type: text/plain" \
-		-i http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
+		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
 	fi
 done
 
