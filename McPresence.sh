@@ -32,10 +32,15 @@ OH_port=80
 OH_user=leases
 OH_pass=password
 
+# The script's directory - where personal_mobile_devices
+# must also be found
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 leases=($(dhcp-lease-list --parsable | awk -F" "  '{print($2)}'))
 
 IFS=$'\n'
-for personal_mobile_device in `cat personal_mobile_devices`
+for personal_mobile_device in `cat $DIR/personal_mobile_devices`
+
 do
 	MAC=`echo $personal_mobile_device | awk '{print($1)}'`
 	person=`echo $personal_mobile_device | awk '{print($2)}'`
