@@ -18,9 +18,10 @@
 #
 # The people's presence in Openhab is modeled as switches
 # which are Openhab items recorded in /etc/openhab2/items
+# and whose state attribute can be ON or OFF
 # For example, here is the content of a /etc/openhab2/items/people.items
-# Switch Alice_presence
-# Switch Bob_presence
+# Switch Alice
+# Switch Bob
 #
 # This script is meant to be called from crontab - every minute is adequate.
 #
@@ -47,11 +48,11 @@ do
 	if [[ " ${leases[@]} " =~ " ${MAC} " ]]; then
 		# Present
 		curl -X POST -d "ON" -H "Content-Type: text/plain" \
-		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
+		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person
 	else
 		# Absent
 		curl -X POST -d "OFF" -H "Content-Type: text/plain" \
-		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person"_presence"
+		http://$OH_user:$OH_pass@$OH_IP:$OH_port/rest/items/$person
 	fi
 done
 
