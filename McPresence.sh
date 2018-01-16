@@ -21,6 +21,10 @@
 # For example, here is the content of a /etc/openhab2/items/people.items
 # Switch Alice_presence
 # Switch Bob_presence
+#
+# This script is meant to be called from crontab - every minute is adequate.
+#
+# Absence detection requires DHCP lease expiration - by default ten minutes in ISC DHCP
 
 # Openhab parameters
 OH_IP=10.9.0.3
