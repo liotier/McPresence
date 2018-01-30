@@ -33,11 +33,14 @@ OH_port=80
 OH_user=leases
 OH_pass=password
 
+# This script ships with the Debian default path for dhcp-lease-list - edit if your distribution differs
+dhcp_lease_list="/usr/sbin/dhcp-lease-list"
+
 # The script's directory - where personal_mobile_devices
 # must also be found
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-leases=($(dhcp-lease-list --parsable | awk -F" "  '{print($2)}'))
+leases=($($dhcp_lease_list --parsable | awk -F" "  '{print($2)}'))
 
 IFS=$'\n'
 for personal_mobile_device in `cat $DIR/personal_mobile_devices`
